@@ -1,6 +1,3 @@
-#include <iostream>
-#include <string>
-#include <stdexcept>
 #include "calc.h"
 
 int main() {
@@ -21,19 +18,14 @@ int main() {
             if (expression.empty()) {
                 throw std::invalid_argument("you didn't write anything, try again:(");
             }
+            
+            std::string exp2 = isValidExpression(expression);
 
-            for (size_t i = 0; i < expression.size(); ++i) {
-                if (expression[i] == ' ') {
-                    expression.erase(i, 1);
-                    --i;
-                }
-            }
-
-            if (!isValidExpression(expression)) {
+            if (exp2 == "") {
                 throw std::invalid_argument("wrong input");
             }
 
-            double result = evaluateExpression(expression);
+            double result = evaluateExpression(exp2);
             std::cout << "your result: " << result << std::endl;
 
         } catch (const std::exception& e) {

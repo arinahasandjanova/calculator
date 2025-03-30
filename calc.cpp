@@ -1,18 +1,13 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include <cmath>
-#include <stdexcept>
 #include "calc.h"
 
-bool isValidExpression(const std::string& input) {
-    for (char c : input) {
-        if (!(isdigit(c) || c == '+' || c == '-' || c == '*' ||
-              c == '/'|| c == '^' || c == '.')) {
-            return false;
-              }
+std::string isValidExpression(const std::string& input) {
+    std::regex norma1{R"((?:(?: *(?:[\-]?\d+[\.]?\d*) *(?:[\-+*\^/]| *))*))"};
+    std::regex norma2{R"(\s+)"};
+    
+    if(std::regex_match(input, norma1)) {
+        return std::regex_replace(input, norma2, "");
     }
-    return true;
+    return "";
 }
 
 bool isValidOp(const char& c) {
